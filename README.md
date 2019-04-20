@@ -33,7 +33,7 @@
 
 ### 软件系统设计
 
-![软件系统设计]($resource/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.png)
+![软件系统设计](https://github.com/W-Captain/----/blob/master/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.png)
 
 ### 硬件系统设计
 1. 车牌识别模块
