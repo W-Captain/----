@@ -7,6 +7,50 @@ import threading
 import serial
 
 t = 0
+a = 0
+
+
+def write(s):  # 写入车牌信息
+    with open('information.txt', 'a+') as f:
+        f.writelines(s + '\n')
+    return 0
+
+
+def delete(s):  # 删除车牌信息
+    a = 0
+    with open('information.txt', 'r') as fr:
+        list1 = fr.readlines()
+    nos = 0
+    for i in range(0, len(list1)):
+        list1[i] = list1[i].strip('\n')
+        if s == list1[i]:
+            x = i
+            nos += 1
+    while nos:
+        try:
+            for i in range(0, len(list1)):
+                list1[i] = list1[i].strip('\n')
+                if s == list1[i]:
+                    del list1[i]
+                    nos -= 1
+                    break
+        except:
+            break
+    with open('information.txt', 'w') as f:
+        for i in range(0, len(list1)):
+            f.writelines(list1[i] + '\n')
+    return 0
+
+
+def judge(s):  # 判断识别到的车牌号是否开锁
+    with open('information.txt', 'r') as fr:
+        list1 = fr.readlines()
+    for i in range(0, len(list1)):
+        list1[i] = list1[i].strip('\n')
+        if s == list1[i]:
+            print('识别成功')  # 加串口传开锁信号
+            return True
+    return False
 
 
 def cont():
@@ -52,6 +96,7 @@ if qqq:
     strt = qqq[0][0][1:7]
     print(strt)
 ##arduino
+"""
 ser = serial.Serial('com3', 9600)
 print(ser)
 # ser.open()  # 打开串口
@@ -62,8 +107,22 @@ str = ser.readline()
 print(str)
 demo1 = b"kuan"
 ser.write(demo1)
-if strt == "D0B250":
+a = 2  # a根据信号来选择写入还是
+s = 'name'  # 接收arduino传回的字符串#
+"""
+ans = strt
+if ans and a == 0:
+    print(ans)  # 输出识别到的车牌号
+    jt = judge(ans)
+elif a == 1:
+    a = write(s)
+elif a == 2:
+    a = delete(s)
+"""if strt == "D0B250":
     time.sleep(1)
     tem = b'5'
     ser.write(tem)
-    print("ok")
+    print("ok")"""
+sertem = b'5'
+if jt:
+    ser.write(b)
